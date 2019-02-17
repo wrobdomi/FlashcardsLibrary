@@ -2,61 +2,17 @@
 
   <mat-card fxFlex.xs="100%" fxFlex="400px">
 
-    <mat-card-title fxLayoutAlign="center">Add a flashcard</mat-card-title>
+    <app-new-collection
+      *ngIf="formStage == 1"
+      (collectionChanged)="onCollectionSelected($event)">
+    </app-new-collection>
 
-    <mat-card-content fxLayoutAlign="center" fxLayout="column" fxLayoutGap="10px">
-
-      <mat-checkbox
-        class="example-margin"
-        [(ngModel)]="addToExistingCollection"
-        name="newCollection">
-        Add to existing collection
-      </mat-checkbox>
-
-      <mat-form-field>
-        <mat-select
-          placeholder="Collection"
-          [disabled]="addToExistingCollection"
-          name="exisitngCollection">
-
-          <mat-option value="german">
-            German
-          </mat-option>
-
-          <mat-option value="spanish">
-            Spanish
-          </mat-option>
-
-          <mat-option value="french">
-            French
-          </mat-option>
-
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field>
-        <input
-          matInput
-          placeholder="New collection name"
-          ngModel
-          name="newCollection"
-          minlength="3"
-          [disabled]="!addToExistingCollection"
-          required
-          #newColl="ngModel">
-          <mat-error *ngIf="!newColl.hasError('required')">
-            Enter at least 3 characters
-          </mat-error>
-      </mat-form-field>
-
-    </mat-card-content>
-
-    <mat-card-actions fxLayoutAlign="center">
-      <button
-        mat-raised-button
-        type="submit"
-        color="primary">Add</button>
-    </mat-card-actions>
+    <app-new-flashcard-content
+      *ngIf="formStage == 2"
+      (goBack)="onGoBack()"
+      (contentAdded)="onContentAdded($event)"
+      [collectionToAdd]="collectionChosen">
+    </app-new-flashcard-content>
 
   </mat-card>
 

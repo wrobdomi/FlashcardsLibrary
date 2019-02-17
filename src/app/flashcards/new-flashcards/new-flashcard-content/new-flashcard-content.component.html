@@ -1,0 +1,64 @@
+<mat-card-title fxLayoutAlign="center">Add flashcard - {{collectionToAdd}}</mat-card-title>
+
+<mat-card-content fxLayoutAlign="center" fxLayout="column" fxLayoutGap="10px">
+
+    <mat-form-field>
+      <input
+        type="text"
+        matInput
+        placeholder="Front of your flashcard"
+        [(ngModel)]="front"
+        name="frontInput"
+        minlength="3"
+        maxlength="100"
+        required
+        #frontRef="ngModel"
+        >
+      <mat-error *ngIf="!frontRef.hasError('required')">
+        Enter at least 3 characters
+      </mat-error>
+      <mat-hint>
+        Enter at least 3 characters
+      </mat-hint>
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <input
+        type="text"
+        matInput
+        placeholder="Back of your flashcard"
+        [(ngModel)]="back"
+        name="backInput"
+        minlength="3"
+        maxlength="200"
+        required
+        #backRef="ngModel"
+        >
+      <mat-error *ngIf="!backRef.hasError('required')">
+        Enter at least 3 characters
+      </mat-error>
+      <mat-hint>
+        Enter at least 3 characters
+      </mat-hint>
+    </mat-form-field>
+
+
+</mat-card-content>
+
+<mat-card-actions fxLayoutAlign="center">
+
+  <button mat-icon-button color="primary" (click)="onGoBack()">
+    <mat-icon>keyboard_backspace</mat-icon>
+  </button>
+
+  <div fxFlex></div>
+
+  <button
+    mat-raised-button
+    (click)="onContentAdded()"
+    color="primary"
+    [disabled]="frontRef.invalid || backRef.invalid">Add flashcard
+  </button>
+
+</mat-card-actions>

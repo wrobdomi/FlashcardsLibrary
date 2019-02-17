@@ -28,6 +28,12 @@
           email
           required
           #inputEmail="ngModel">
+          <mat-error *ngIf="inputEmail.hasError('required')">
+            Field required
+          </mat-error>
+          <mat-error *ngIf="!inputEmail.hasError('required')">
+            Email is invalid
+          </mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -38,7 +44,10 @@
           ngModel
           name="password"
           required
-          #inputPass>
+          #inputPass="ngModel">
+          <mat-error *ngIf="inputPass.hasError('required')">
+            Field required
+          </mat-error>
       </mat-form-field>
 
       <button

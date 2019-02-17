@@ -1,0 +1,77 @@
+<mat-card-title fxLayoutAlign="center">Choose collection</mat-card-title>
+
+<mat-card-content fxLayoutAlign="center" fxLayout="column" fxLayoutGap="10px">
+
+    <mat-checkbox
+      class="example-margin"
+      [(ngModel)]="addToExistingCollection"
+      name="newCollection">
+      Add to existing collection
+    </mat-checkbox>
+
+    <mat-form-field>
+      <mat-select
+        placeholder="Collection"
+        [disabled]="!addToExistingCollection"
+        name="exisitngCollection"
+        required
+        #oldColl
+        [(value)]="oldCollection"
+        >
+
+        <mat-option value="German">
+          German
+        </mat-option>
+
+        <mat-option value="Spanish">
+          Spanish
+        </mat-option>
+
+        <mat-option value="French">
+          French
+        </mat-option>
+
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="New collection name"
+        [(ngModel)]="newCollection"
+        name="newCollection"
+        minlength="3"
+        [disabled]="addToExistingCollection"
+        required
+        #newColl="ngModel"
+        >
+      <mat-error *ngIf="!newColl.hasError('required')">
+        Enter at least 3 characters
+      </mat-error>
+      <mat-hint>
+        Enter at least 3 characters
+      </mat-hint>
+    </mat-form-field>
+
+    <p>Or pick one of the most popular collections</p>
+    <mat-chip-list >
+      <mat-chip [selected]="'German'" (selectionChange)="chipSelected($event)">German</mat-chip>
+      <mat-chip color="accent" selected>Capitals</mat-chip>
+      <mat-chip color="primary" selected>Spanish</mat-chip>
+
+    </mat-chip-list>
+
+
+
+</mat-card-content>
+
+<mat-card-actions fxLayoutAlign="center">
+
+  <button
+    mat-raised-button
+    (click)="onCollectionChosen()"
+    color="primary"
+    [disabled]="(newColl.invalid && oldColl.disabled )  || ( oldColl.empty && newColl.disabled )">Next
+  </button>
+
+</mat-card-actions>
