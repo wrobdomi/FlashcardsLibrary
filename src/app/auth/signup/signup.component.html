@@ -1,0 +1,92 @@
+<section class="signup-form" >
+
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title> Sign Up </mat-card-title>
+        <mat-card-subtitle>Explore over a thousand of free flashcards!</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content fxLayout="row" fxLayoutAlign="center center">
+        <div fxFlex="25%"></div>
+        <img mat-card-image src="assets/images/signup.png" alt="Signup image">
+        <div fxFlex="25%"></div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+    <mat-form-field>
+      <input
+        type="email"
+        matInput
+        placeholder="Your email"
+        ngModel
+        name="email"
+        email
+        required
+        #inputEmail="ngModel">
+        <mat-error *ngIf="inputEmail.hasError('required')">
+          Field required
+        </mat-error>
+        <mat-error *ngIf="!inputEmail.hasError('required')">
+          Email is invalid
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field hintLabel="Enter at least 6 characters">
+      <input
+        type="password"
+        matInput
+        placeholder="Your password"
+        ngModel
+        name="password"
+        required
+        minlength="6"
+        #inputPass>
+        <mat-hint align="end">
+          {{inputPass.value?.length || 0}}/6
+        </mat-hint>
+        <mat-error>
+          Enter at least 6 characters
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        [min]="minDate"
+        [max]="maxDate"
+        matInput
+        placeholder="Your birthdate"
+        [matDatepicker]="picker"
+        ngModel
+        name="birthday"
+        required>
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="picker">
+      </mat-datepicker-toggle>
+      <mat-datepicker
+        #picker
+        startView="year"
+        [startAt]="startDate">
+      </mat-datepicker>
+    </mat-form-field>
+
+    <mat-checkbox
+      ngModel
+      name="agree"
+      required>
+      Agree to Terms and Conditions
+    </mat-checkbox>
+
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="f.invalid">
+      Submit
+    </button>
+
+  </form>
+</section>

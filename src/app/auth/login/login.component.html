@@ -1,0 +1,53 @@
+<section class="login-form" >
+
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <mat-card>
+        <mat-card-header fxLayout="column" fxLayoutAlign="center center">
+          <mat-card-title> FlashcardsLibrary</mat-card-title>
+          <mat-card-subtitle>Great to see you again, log in !  </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content fxLayout="row" fxLayoutAlign="center center">
+          <div fxFlex="20%"></div>
+          <img mat-card-image src="assets/images/flashcard.png" alt="Flashcards image">
+          <div fxFlex="20%"></div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <p></p>
+
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+      <mat-form-field>
+        <input
+          type="email"
+          matInput
+          placeholder="Your email"
+          ngModel
+          name="email"
+          email
+          required
+          #inputEmail="ngModel">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          type="password"
+          matInput
+          placeholder="Your password"
+          ngModel
+          name="password"
+          required
+          #inputPass>
+      </mat-form-field>
+
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="f.invalid">
+        Submit
+      </button>
+
+    </form>
+  </section>

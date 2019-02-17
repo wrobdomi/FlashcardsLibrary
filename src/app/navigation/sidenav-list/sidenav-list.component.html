@@ -1,0 +1,22 @@
+<mat-nav-list>
+
+    <a mat-list-item routerLink="/signup" (click)="onClose()">
+      <mat-icon>account_circle</mat-icon>
+      <span class="sidenav-item">Signup</span>
+    </a>
+    <a mat-list-item routerLink="/login" (click)="onClose()">
+      <mat-icon>arrow_forward</mat-icon>
+      <span class="sidenav-item">Login</span>
+    </a>
+    <a mat-list-item routerLink="/flashcards" (click)="onClose()">
+      <mat-icon>business_center</mat-icon>
+      <span class="sidenav-item">Flashcards</span>
+    </a>
+    <mat-list-item>
+      <button mat-icon-button (click)="onClose()">
+        <mat-icon>arrow_back</mat-icon>
+        <span class="sidenav-item">Logout</span>
+      </button>
+    </mat-list-item>
+
+</mat-nav-list>
