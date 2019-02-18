@@ -1,0 +1,23 @@
+.learning-flashcard-progress {
+  padding-top: 30px;
+}
+
+.flashcard-card {
+  width: 300px;
+}
+
+.learning-flashcard-container {
+  padding-top: 30px;
+}
+
+mat-card {
+  border: solid 1px;
+}
+
+.spinner-desc {
+  text-align: center
+}
+
+.collection-name {
+  font-size: 24px;
+}

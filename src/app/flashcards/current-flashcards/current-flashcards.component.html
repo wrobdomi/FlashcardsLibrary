@@ -1,3 +1,27 @@
-<p>
-  current-flashcards works!
-</p>
+<!-- <div fxLayout="row" fxLayoutAlign="center" class="current-flashcard-container"> -->
+<section fxLayout="row" fxLayoutAlign="center" class="current-flashcard-container">
+
+  <mat-card fxLayout="column" fxLayoutGap="30px">
+
+    <mat-card-title fxFlexAlign="center">Choose from available flashcards</mat-card-title>
+
+    <mat-card-content fxLayout="column">
+
+      <mat-grid-list cols="3" rowHeight="1:1" gutterSize="0px" >
+
+        <mat-grid-tile *ngFor="let learning of availableCollections; let i = index">
+          <button mat-raised-button color="primary" class="grid-list-item"
+            matBadge="{{learning.all}}" matBadgePosition="after" matBadgeColor="accent"
+            (click)="startLearning(learning.collection)">
+              {{ learning.collection }}
+          </button>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</section>
+<!-- </div> -->

@@ -1,15 +1,21 @@
-<mat-tab-group>
+<mat-tab-group *ngIf="learningStatus==false">
+
+  <mat-tab label="My progress">
+    <app-solved-flashcards></app-solved-flashcards>
+  </mat-tab>
 
   <mat-tab label="New Flashcard">
     <app-new-flashcards></app-new-flashcards>
   </mat-tab>
 
   <mat-tab label="Start Learning">
-    <app-current-flashcards></app-current-flashcards>
-  </mat-tab>
-
-  <mat-tab label="My progress">
-    <app-solved-flashcards></app-solved-flashcards>
+    <app-current-flashcards (startLearningCollection)="startLearning($event)"></app-current-flashcards>
   </mat-tab>
 
 </mat-tab-group>
+
+<app-learning-flashcards
+  [collectionName]="nowLearning"
+  *ngIf="learningStatus==true"
+  (learningCancelled)="onLearningCancelled()">
+</app-learning-flashcards>

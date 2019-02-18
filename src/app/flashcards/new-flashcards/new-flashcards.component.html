@@ -4,7 +4,7 @@
 
     <app-new-collection
       *ngIf="formStage == 1"
-      (collectionChanged)="onCollectionSelected($event)">
+      (collectionSelected)="onCollectionSelected($event)">
     </app-new-collection>
 
     <app-new-flashcard-content

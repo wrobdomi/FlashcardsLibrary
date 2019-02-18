@@ -21,6 +21,10 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { NewCollectionComponent } from './flashcards/new-flashcards/new-collection/new-collection.component';
 import { NewFlashcardContentComponent } from './flashcards/new-flashcards/new-flashcard-content/new-flashcard-content.component';
+import { LearningFlashcardsComponent } from './flashcards/learning-flashcards/learning-flashcards.component';
+import { StopLearningComponent } from './flashcards/learning-flashcards/stop-learning.components';
+import { AuthService } from './auth/auth.service';
+import { FlashcardsService } from './flashcards/flashcards.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,9 @@ import { NewFlashcardContentComponent } from './flashcards/new-flashcards/new-fl
     HeaderComponent,
     SidenavListComponent,
     NewCollectionComponent,
-    NewFlashcardContentComponent
+    NewFlashcardContentComponent,
+    LearningFlashcardsComponent,
+    StopLearningComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +51,8 @@ import { NewFlashcardContentComponent } from './flashcards/new-flashcards/new-fl
     FlexLayoutModule,
     FormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ AuthService, FlashcardsService ],
+  bootstrap: [AppComponent],
+  entryComponents: [StopLearningComponent]
 })
 export class AppModule { }

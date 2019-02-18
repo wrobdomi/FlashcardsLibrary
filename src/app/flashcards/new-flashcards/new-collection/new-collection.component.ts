@@ -1,4 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { FlashcardsService } from '../../flashcards.service';
+import { Learning } from '../../learning.model';
 
 @Component({
   selector: 'app-new-collection',
@@ -10,29 +12,31 @@ export class NewCollectionComponent implements OnInit {
   addToExistingCollection = false;
   newCollection: string;
   oldCollection: string;
-  myChip: string;
+  collectionToAdd: string;
 
-  @Output() collectionChanged = new EventEmitter<string[]>();
+  availableCollections: Learning[] = [];
 
-  constructor() { }
+
+  @Output() collectionSelected = new EventEmitter<string>();
+
+  constructor(private flashcardsService: FlashcardsService) { }
 
   ngOnInit() {
+    this.availableCollections = this.flashcardsService.getAvailableCollections();
   }
 
   onCollectionChosen() {
-
-    console.log(this.addToExistingCollection);
-    console.log(this.oldCollection);
-    console.log(this.newCollection);
-    this.collectionChanged.emit([this.oldCollection, this.newCollection, this.addToExistingCollection.toString()]);
-
+    if (this.addToExistingCollection) {
+      this.collectionToAdd = this.oldCollection;
+    } else {
+      this.collectionToAdd = this.newCollection;
+    }
+    this.collectionSelected.emit(this.collectionToAdd);
   }
 
-  chipSelected(chip) {
-    console.log(chip.selected);
+  onClickedFab(exColl) {
+    this.collectionSelected.emit(exColl);
   }
-
-
 
 
 }

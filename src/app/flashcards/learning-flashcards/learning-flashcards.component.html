@@ -1,0 +1,100 @@
+<section class="learning-flashcard-progress" fxLayout fxLayoutAlign="center center">
+  <div class="collection-name">
+    {{collectionName}}
+  </div>
+</section>
+
+<section class="learning-flashcard-progress" fxLayout fxLayoutAlign="center center">
+    <mat-card fxFlex="690px" fxLayout fxLayout.lt-sm="column" fxLayoutAlign="center center">
+
+     <div>
+        <mat-progress-spinner mode="determinate" color="primary" [value]="correct"></mat-progress-spinner>
+        <p class="spinner-desc">Correct</p>
+        <p class="spinner-desc">10/20</p>
+      </div>
+
+      <div fxFlex></div>
+
+      <div>
+        <mat-progress-spinner mode="determinate" color="warn" [value]="wrong"></mat-progress-spinner>
+        <p class="spinner-desc">Wrong</p>
+        <p class="spinner-desc">8/20</p>
+      </div>
+
+      <div fxFlex></div>
+
+      <div>
+        <mat-progress-spinner mode="determinate" color="accent" [value]="all"></mat-progress-spinner>
+        <p class="spinner-desc">All</p>
+        <p class="spinner-desc">18/20</p>
+      </div>
+
+    </mat-card>
+</section>
+
+
+
+<section fxLayout.gt-md="row" fxLayout="column" fxLayoutAlign="center center" class="learning-flashcard-container" fxLayoutGap="30px">
+
+  <mat-card class="flashcard-card">
+
+    <mat-card-title fxLayoutAlign="center">Front</mat-card-title>
+
+    <hr>
+
+    <mat-card-content fxLayoutAlign="center" fxLayout="row" fxLayoutGap="10px">
+      Front of a flashcard
+    </mat-card-content>
+
+    <hr>
+
+    <mat-card-actions fxLayoutAlign="center">
+
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onAnswered()"> Show Back
+      </button>
+
+    </mat-card-actions>
+
+  </mat-card>
+
+
+  <mat-card class="flashcard-card" *ngIf="answered == true">
+
+    <mat-card-title fxLayoutAlign="center">Back</mat-card-title>
+
+    <hr>
+
+    <mat-card-content fxLayoutAlign="center" fxLayout="row" fxLayoutGap="10px">
+      Back of a flashcard
+    </mat-card-content>
+
+    <hr>
+
+    <mat-card-actions fxLayout="row">
+
+      <button mat-icon-button color="primary" fxFlexAlign="start" (click)="onCorrectAnswer()">
+        <mat-icon>done</mat-icon>
+      </button>
+
+      <div fxFlex></div>
+
+      <button mat-icon-button color="warn" fxFlexAlign="end" (click)="onWrongAnswer()">
+        <mat-icon>clear</mat-icon>
+      </button>
+
+    </mat-card-actions>
+
+  </mat-card>
+
+</section>
+
+<section class="learning-flashcard-progress" fxLayout fxLayoutAlign="center center">
+  <div class="collection-name">
+    <button mat-raised-button color="warn" fxFlexAlign="end" (click)="onCancelLearninig()">
+      Cancel
+    </button>
+  </div>
+</section>

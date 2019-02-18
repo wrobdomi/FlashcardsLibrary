@@ -7,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FlashcardsComponent implements OnInit {
 
+  learningStatus = false;
+  nowLearning = '';
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  startLearning(collection) {
+    this.learningStatus = true;
+    this.nowLearning = collection;
+    console.log('Now learning ' + collection);
+  }
+
+
+  onLearningCancelled() {
+    this.learningStatus = false;
+  }
+
 
 }

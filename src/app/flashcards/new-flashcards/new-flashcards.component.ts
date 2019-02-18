@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatSnackBar} from '@angular/material';
+import { FlashcardsService } from '../flashcards.service';
+import { Flashcard } from '../flashcard.model';
 
 @Component({
   selector: 'app-new-flashcards',
@@ -8,47 +10,47 @@ import {MatSnackBar} from '@angular/material';
 })
 export class NewFlashcardsComponent implements OnInit {
 
-  collectionChosen = '';
-  flashcardFront = '';
-  flashcardBack = '';
-
-  formStage: Number;
+  collectionChosen: string;
+  flashcardFront: string;
+  flashcardBack: string;
+  formStage: number;
 
   constructor(
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private flashcardsService: FlashcardsService
   ) { }
 
   ngOnInit() {
     this.formStage = 1;
+    this.collectionChosen = '';
+    this.flashcardFront = '';
+    this.flashcardBack = '';
   }
 
 
-  onCollectionSelected(event) {
-    console.log('Receiving event from new-collection');
-    console.log(event);
-    if (event[2]) {
-      this.collectionChosen = event[0];
-    } else {
-      this.collectionChosen = event[1];
-    }
+  onCollectionSelected(selectedCollection) {
+    this.collectionChosen = selectedCollection;
     this.formStage = 2;
   }
 
   onGoBack() {
+    this.formStage = 1;
     this.collectionChosen = '';
     this.flashcardFront = '';
     this.flashcardBack = '';
-    this.formStage = 1;
   }
 
-  onContentAdded(event) {
-    console.log('aaaaaaaaaaa');
-    this.flashcardFront = event[0];
-    this.flashcardBack = event[1];
+  onContentAdded(flashcardSelected) {
+
+    this.flashcardFront = flashcardSelected[0];
+    this.flashcardBack = flashcardSelected[1];
+    const flashcard: Flashcard = {
+      collection: this.collectionChosen,
+      front: this.flashcardFront,
+      back: this.flashcardBack
+    };
+    this.flashcardsService.addFlashcard(flashcard);
     this.openSnackBar('Flashcard Added', 'OK');
-    console.log(this.collectionChosen);
-    console.log(this.flashcardBack);
-    console.log(this.flashcardFront);
 
   }
 
@@ -57,7 +59,5 @@ export class NewFlashcardsComponent implements OnInit {
       duration: 4000,
     });
   }
-
-
 
 }

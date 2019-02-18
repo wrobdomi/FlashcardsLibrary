@@ -1,0 +1,25 @@
+mat-grid-list {
+  height: 100%;
+}
+
+.current-flashcard-container {
+  padding-top: 10px;
+}
+
+mat-grid-tile-header {
+  font-size: 21px;
+  color: rgb(56,147,192);
+}
+
+/* mat-grid-tile {
+  border: 3px solid white;
+} */
+
+button {
+  height:70px;
+}
+
+.grid-list-item{
+  width: 90px;
+  overflow-x: hidden !important;
+}

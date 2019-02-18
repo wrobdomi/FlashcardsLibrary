@@ -16,6 +16,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -33,7 +37,11 @@ import { MatChipsModule } from '@angular/material/chips';
     MatTabsModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatChipsModule
+    MatChipsModule,
+    MatGridListModule,
+    MatBadgeModule,
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
   exports: [
     MatButtonModule,
@@ -50,7 +58,11 @@ import { MatChipsModule } from '@angular/material/chips';
     MatTabsModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatChipsModule
+    MatChipsModule,
+    MatGridListModule,
+    MatBadgeModule,
+    MatProgressSpinnerModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule {}

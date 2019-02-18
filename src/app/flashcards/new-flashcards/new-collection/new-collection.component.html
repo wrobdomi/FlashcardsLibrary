@@ -19,16 +19,8 @@
         [(value)]="oldCollection"
         >
 
-        <mat-option value="German">
-          German
-        </mat-option>
-
-        <mat-option value="Spanish">
-          Spanish
-        </mat-option>
-
-        <mat-option value="French">
-          French
+        <mat-option *ngFor="let learnings of availableCollections" value="{{learnings.collection}}" >
+          {{learnings.collection}}
         </mat-option>
 
       </mat-select>
@@ -41,25 +33,26 @@
         [(ngModel)]="newCollection"
         name="newCollection"
         minlength="3"
+        maxlength="10"
         [disabled]="addToExistingCollection"
         required
         #newColl="ngModel"
         >
       <mat-error *ngIf="!newColl.hasError('required')">
-        Enter at least 3 characters
+        Enter 3 to 10 characters
       </mat-error>
       <mat-hint>
-        Enter at least 3 characters
+        Enter 3 to 10 characters
       </mat-hint>
     </mat-form-field>
 
     <p>Or pick one of the most popular collections</p>
-    <mat-chip-list >
-      <mat-chip [selected]="'German'" (selectionChange)="chipSelected($event)">German</mat-chip>
-      <mat-chip color="accent" selected>Capitals</mat-chip>
-      <mat-chip color="primary" selected>Spanish</mat-chip>
+    <div fxLayout="row" fxLayoutGap="15px">
+      <button mat-fab color="primary" (click)="onClickedFab('German')" >German</button>
+      <button mat-fab color="warn" (click)="onClickedFab('Capitals')">Capitals</button>
+      <button mat-fab color="accent" (click)="onClickedFab('French')">French</button>
+    </div>
 
-    </mat-chip-list>
 
 
 
