@@ -8,25 +8,25 @@
     <mat-card fxFlex="690px" fxLayout fxLayout.lt-sm="column" fxLayoutAlign="center center">
 
      <div>
-        <mat-progress-spinner mode="determinate" color="primary" [value]="correct"></mat-progress-spinner>
+        <mat-progress-spinner mode="determinate" color="primary" [value]="correctPercentage"></mat-progress-spinner>
         <p class="spinner-desc">Correct</p>
-        <p class="spinner-desc">10/20</p>
+        <p class="spinner-desc">{{answeredCorrect}}/{{ allQuestionsNum }}</p>
       </div>
 
       <div fxFlex></div>
 
       <div>
-        <mat-progress-spinner mode="determinate" color="warn" [value]="wrong"></mat-progress-spinner>
+        <mat-progress-spinner mode="determinate" color="warn" [value]="wrongPercentage"></mat-progress-spinner>
         <p class="spinner-desc">Wrong</p>
-        <p class="spinner-desc">8/20</p>
+        <p class="spinner-desc">{{answeredWrong}}/{{ allQuestionsNum }}</p>
       </div>
 
       <div fxFlex></div>
 
       <div>
-        <mat-progress-spinner mode="determinate" color="accent" [value]="all"></mat-progress-spinner>
+        <mat-progress-spinner mode="determinate" color="accent" [value]="allQuestionsPercentage"></mat-progress-spinner>
         <p class="spinner-desc">All</p>
-        <p class="spinner-desc">18/20</p>
+        <p class="spinner-desc">{{answeredAll}}/{{ allQuestionsNum }}</p>
       </div>
 
     </mat-card>

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FlashcardsService } from '../flashcards.service';
 import { Learning } from '../learning.model';
 
@@ -9,8 +9,6 @@ import { Learning } from '../learning.model';
 })
 export class CurrentFlashcardsComponent implements OnInit {
 
-  @Output() startLearningCollection = new EventEmitter<string>();
-
   availableCollections: Learning[] = [];
 
   constructor(private flashcardsService: FlashcardsService) { }
@@ -20,8 +18,7 @@ export class CurrentFlashcardsComponent implements OnInit {
   }
 
   startLearning(collection) {
-    console.log(collection);
-    this.startLearningCollection.emit(collection);
+    this.flashcardsService.startLearning(collection);
   }
 
 }

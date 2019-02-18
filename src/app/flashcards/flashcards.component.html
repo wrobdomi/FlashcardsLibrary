@@ -9,13 +9,12 @@
   </mat-tab>
 
   <mat-tab label="Start Learning">
-    <app-current-flashcards (startLearningCollection)="startLearning($event)"></app-current-flashcards>
+    <app-current-flashcards></app-current-flashcards>
   </mat-tab>
 
 </mat-tab-group>
 
 <app-learning-flashcards
   [collectionName]="nowLearning"
-  *ngIf="learningStatus==true"
-  (learningCancelled)="onLearningCancelled()">
+  *ngIf="learningStatus==true">
 </app-learning-flashcards>

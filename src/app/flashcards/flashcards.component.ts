@@ -1,29 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FlashcardsService } from './flashcards.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-flashcards',
   templateUrl: './flashcards.component.html',
   styleUrls: ['./flashcards.component.css']
 })
-export class FlashcardsComponent implements OnInit {
+export class FlashcardsComponent implements OnInit, OnDestroy {
 
   learningStatus = false;
   nowLearning = '';
 
-  constructor() { }
+  nowLearningCollection: Subscription;
+
+  constructor(private flashcardsService: FlashcardsService) { }
 
   ngOnInit() {
+    this.nowLearningCollection = this.flashcardsService.collectionChanged.subscribe(collectionName => {
+      if ( collectionName ) {
+        this.nowLearning = collectionName;
+        this.learningStatus = true;
+        console.log('Now learning ' + this.nowLearning);
+      } else {
+        this.nowLearning = '';
+        this.learningStatus = false;
+      }
+    });
+
   }
 
-  startLearning(collection) {
-    this.learningStatus = true;
-    this.nowLearning = collection;
-    console.log('Now learning ' + collection);
-  }
-
-
-  onLearningCancelled() {
-    this.learningStatus = false;
+  ngOnDestroy() {
+    this.nowLearningCollection.unsubscribe();
   }
 
 
