@@ -153,7 +153,7 @@ The app is already running on the server! Feel free to play around with all feat
 
 ### Architecture
 * SPA (Single Page Application) - Frontend
-* Firestore Cloud - NoSQL DB - Backend
+* Firestore Cloud, NoSQL DB - Backend
 
 ### Tools
   * MS Visual Studio Code
