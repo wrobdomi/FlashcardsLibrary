@@ -2,10 +2,10 @@ export const environment = {
   production: true,
   firebase: {
     apiKey: "private",
-    authDomain: "flashcards-library.firebaseapp.com",
+    authDomain: "private",
     databaseURL: "private",
     projectId: "flashcards-library",
-    storageBucket: "flashcards-library.appspot.com",
+    storageBucket: "private",
     messagingSenderId: "private"
   }
 };
