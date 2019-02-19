@@ -48,8 +48,8 @@ The app is already running on the server! Feel free to play around with all feat
 
 ## Project Structure
 
-* src/app
-  + /auth - __user authentication__
+* /src/app
+  + /auth
     * /login 
       + login.component.css
       + login.component.html
