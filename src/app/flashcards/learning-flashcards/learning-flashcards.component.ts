@@ -43,26 +43,19 @@ export class LearningFlashcardsComponent implements OnInit, OnDestroy {
     private flashcardsService: FlashcardsService) {}
 
   ngOnInit() {
-
     this.flashcardsSubscription = this.flashcardsService.flashcardsChanged.subscribe(
       flashcards =>  {
         this.flashcards = flashcards;
-        console.log('aaaaaaaaaaaaaaaaaaa');
-        console.log(flashcards[0].front);
-        console.log(flashcards[0].back);
-
     }
     );
     this.flashcardsService.fetchFlashcardsForCollection(this.collectionName);
 
-    console.log('bbbbbbbbbbbbbbbbbbbbbbbb');
     this.correctPercentage = 0;
     this.wrongPercentage = 0;
     this.allQuestionsPercentage = 0;
     this.answeredAll = 0;
     this.answeredCorrect = 0;
     this.answeredWrong = 0;
-
   }
 
   onAnswered() {
@@ -82,7 +75,6 @@ export class LearningFlashcardsComponent implements OnInit, OnDestroy {
       this.currentFlashcardFront = this.flashcards[this.answeredAll].front;
       this.currentFlashcardBack = this.flashcards[this.answeredAll].back;
     }
-
   }
 
   onWrongAnswer() {
@@ -108,7 +100,6 @@ export class LearningFlashcardsComponent implements OnInit, OnDestroy {
   }
 
   onCompletedLearning() {
-
     this.flashcardsService.addSolvedFlashcards({
       collection: this.collectionName,
       all: this.allQuestionsNum,
@@ -131,7 +122,6 @@ export class LearningFlashcardsComponent implements OnInit, OnDestroy {
   }
 
   onCancelLearninig() {
-
     this.flashcardsService.addSolvedFlashcards({
       collection: this.collectionName,
       all: this.allQuestionsNum,
@@ -155,7 +145,5 @@ export class LearningFlashcardsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.flashcardsSubscription.unsubscribe();
   }
-
-
 
 }

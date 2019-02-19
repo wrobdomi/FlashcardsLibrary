@@ -21,7 +21,6 @@ export class FlashcardsComponent implements OnInit, OnDestroy {
       if ( collectionName ) {
         this.nowLearning = collectionName;
         this.learningStatus = true;
-        console.log('Now learning ' + this.nowLearning);
       } else {
         this.nowLearning = '';
         this.learningStatus = false;
@@ -35,6 +34,5 @@ export class FlashcardsComponent implements OnInit, OnDestroy {
       this.nowLearningCollection.unsubscribe();
     }
   }
-
 
 }

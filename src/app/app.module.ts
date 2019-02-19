@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AuthModule } from './auth/auth.module';
+import { StoreModule} from '@ngrx/store';
 
 /** Import services */
 import { AuthService } from './auth/auth.service';
@@ -23,6 +24,7 @@ import { FlashcardsService } from './flashcards/flashcards.service';
 import { UIService } from './shared/ui.service';
 
 import { environment } from '../environments/environment';
+import { reducers } from './app.reducer';
 
 
 @NgModule({
@@ -41,7 +43,8 @@ import { environment } from '../environments/environment';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AuthModule
+    AuthModule,
+    StoreModule.forRoot(reducers)
   ],
   providers: [
     AuthService,

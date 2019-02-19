@@ -31,7 +31,4 @@ export class CurrentFlashcardsComponent implements OnInit, OnDestroy {
     this.availableCollectionsSubscription.unsubscribe();
   }
 
-
-
-
 }

@@ -52,5 +52,4 @@ export class NewCollectionComponent implements OnInit, OnDestroy {
 
   }
 
-
 }
