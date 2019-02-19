@@ -11,7 +11,6 @@
 - [Project Structure](#project-structure)
 - [Technologies](#technologies)
   * [Architecture](#architecture)
-  * [Libraries](#libraries)
   * [Tools](#tools)
 
 
