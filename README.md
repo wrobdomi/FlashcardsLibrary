@@ -40,10 +40,13 @@ The app is an online flashcards library I created taking my first steps in Angul
 The app is already running on the server! Feel free to play around with all features. Sign up or log in as test@test.com (password: testing). https://flashcards-library.firebaseapp.com 
 
 ### Browse flashcards
+![solving](https://user-images.githubusercontent.com/37666186/53055161-046dd380-34a7-11e9-9940-45c55ed258c1.gif)
 
 ### Create flashcards
+![adding](https://user-images.githubusercontent.com/37666186/53055138-f28c3080-34a6-11e9-8ecd-d206ccf2fb8b.gif)
 
 ### Monitor your progress
+![monitor](https://user-images.githubusercontent.com/37666186/53055156-fe77f280-34a6-11e9-9878-dac0d467844b.gif)
 
 
 ## Project Structure
