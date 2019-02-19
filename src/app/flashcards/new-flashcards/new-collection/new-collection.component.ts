@@ -46,7 +46,10 @@ export class NewCollectionComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.availableCollectionsSubscription.unsubscribe();
+    if ( this.availableCollectionsSubscription ) {
+      this.availableCollectionsSubscription.unsubscribe();
+    }
+
   }
 
 

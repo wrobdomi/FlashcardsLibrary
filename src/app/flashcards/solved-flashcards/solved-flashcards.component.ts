@@ -3,6 +3,7 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { SolvedFlashcard } from '../solved-flashcard.model';
 import { FlashcardsService } from '../flashcards.service';
 import { Subscription } from 'rxjs';
+import { UIService } from 'src/app/shared/ui.service';
 
 @Component({
   selector: 'app-solved-flashcards',
@@ -14,18 +15,27 @@ export class SolvedFlashcardsComponent implements OnInit, AfterViewInit, OnDestr
   displayedColumns = ['date', 'collection', 'correct', 'wrong', 'state' ];
   dataSource = new MatTableDataSource<SolvedFlashcard>();
 
+  isLoading = true;
+  private solvedReadySubscription: Subscription;
+
   private flashChangedSubscription: Subscription;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private flshcardsService: FlashcardsService) { }
+  constructor(
+    private flshcardsService: FlashcardsService,
+    private uiService: UIService) { }
 
   ngOnInit() {
+    this.solvedReadySubscription = this.uiService.loadingStateChanged.subscribe(isLoading => {
+      this.isLoading = isLoading;
+    });
+
     this.flashChangedSubscription = this.flshcardsService.solvedFlashcardsChanged.subscribe( (solved: SolvedFlashcard[]) => {
       this.dataSource.data = solved;
-    })
-    this.flshcardsService.fetchCompletedOrCancellefFlashcards();
+    });
+    this.flshcardsService.fetchCompletedOrCancelledFlashcards();
   }
 
   ngAfterViewInit() {
@@ -38,7 +48,14 @@ export class SolvedFlashcardsComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   ngOnDestroy() {
-    this.flashChangedSubscription.unsubscribe();
+
+    if (this.flashChangedSubscription) {
+      this.flashChangedSubscription.unsubscribe();
+    }
+    if (this.solvedReadySubscription) {
+      this.solvedReadySubscription.unsubscribe();
+    }
+
   }
 
 }

@@ -31,7 +31,9 @@ export class FlashcardsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.nowLearningCollection.unsubscribe();
+    if (this.nowLearningCollection) {
+      this.nowLearningCollection.unsubscribe();
+    }
   }
 
 

@@ -5,6 +5,7 @@ import { SolvedFlashcard } from './solved-flashcard.model';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { UIService } from '../shared/ui.service';
 
 
 @Injectable()
@@ -44,7 +45,9 @@ export class FlashcardsService {
   learningNowCollection: string;
 
 
-  constructor(private db: AngularFirestore) {
+  constructor(
+    private db: AngularFirestore,
+    private uiService: UIService) {
     this.learningNowCollection = '';
   }
 
@@ -57,6 +60,7 @@ export class FlashcardsService {
 
   fetchAvailableCollections() {
     // return this.availableLearnings.slice(); // copy of the array
+    this.uiService.loadingStateChanged.next(true);
     this.fbSubs.push(
     this.db
       .collection('availableLearnings')
@@ -71,9 +75,11 @@ export class FlashcardsService {
       }))
       .subscribe(
         ( learnings: Learning[]) => {
+        this.uiService.loadingStateChanged.next(false);
         this.availableLearnings = learnings;
-        console.log('ooo ' + learnings);
         this.learningsChanged.next([...this.availableLearnings]);
+      }, error => {
+        this.uiService.showSnackbar('Database unavailable. Plase, try later.', null, 3000);
       }));
 
   }
@@ -101,18 +107,22 @@ export class FlashcardsService {
         this.flashcards = flashcards;
         console.log('ooo ' + flashcards);
         this.flashcardsChanged.next([...this.flashcards]);
+      }, error => {
+        this.uiService.showSnackbar('Database unavailable. Plase, try later.', null, 3000);
       }));
 
   }
 
 
-  fetchCompletedOrCancellefFlashcards() {
+  fetchCompletedOrCancelledFlashcards() {
     this.fbSubs.push(
     this.db
       .collection('solvedFlashcards')
       .valueChanges()
       .subscribe( (solved: SolvedFlashcard[]) => {
         this.solvedFlashcardsChanged.next(solved);
+      }, error => {
+        this.uiService.showSnackbar('Database unavailable. Plase, try later.', null, 3000);
       }));
   }
 
