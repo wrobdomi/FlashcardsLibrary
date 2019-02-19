@@ -51,7 +51,7 @@ The app is already running on the server! Feel free to play around with all feat
 ## Project Structure
 
 * /src/app
-  + /auth
+  + /auth __user authentication__
     * /login 
       + login.component.css
       + login.component.html
