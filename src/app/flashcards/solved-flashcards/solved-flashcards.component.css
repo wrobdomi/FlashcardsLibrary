@@ -1,0 +1,11 @@
+.cell-item-completed {
+  color: rgb(194,24,91);
+}
+
+.cell-item-cancelled {
+  color: rgb(244,67,54);
+}
+
+.cell-item-correct {
+  color: lightgreen;
+}

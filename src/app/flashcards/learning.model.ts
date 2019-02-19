@@ -1,5 +1,5 @@
 export interface Learning {
-  id: string;
+  id?: string;
   collection: string;
-  all: number;
+  all?: number;
 }

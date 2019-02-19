@@ -3,50 +3,69 @@ import { AuthData } from './auth-data.module';
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { FlashcardsService } from '../flashcards/flashcards.service';
 
 @Injectable()
 export class AuthService {
 
-  private user: User;
+  private isAuthenticated = false;
   authChange = new Subject<boolean>();
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private afAuth: AngularFireAuth,
+    private flashcardsService: FlashcardsService ) {}
 
-  registerUser(authData: AuthData) {
-    this.user = {
-      email: authData.email,
-      userId: Math.round(Math.random() * 10000).toString()
-    };
-    this.authChange.next(true);
-    this.router.navigate(['/flashcards']);
-    this.authSuccessfully();
+
+  initAuthListener() {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.isAuthenticated = true;
+        this.authChange.next(true);
+        this.router.navigate(['/flashcards']);
+      } else {
+        this.flashcardsService.cancelSubscriptions();
+        this.authChange.next(false);
+        this.router.navigate(['/login']);
+        this.isAuthenticated = false;
+      }
+    });
   }
 
+  registerUser(authData: AuthData) {
+    this.afAuth.auth.createUserWithEmailAndPassword(
+      authData.email,
+      authData.password
+      ).then( result => {
+        console.log(result);
+      })
+      .catch( error => {
+        console.log(error);
+      });
+  }
+
+
   login(authData: AuthData) {
-    this.user = {
-      email: authData.email,
-      userId: Math.round(Math.random() * 10000).toString()
-    };
-    this.authSuccessfully();
+    this.afAuth.auth.signInWithEmailAndPassword(
+      authData.email,
+      authData.password
+    ).then( result => {
+      console.log(result);
+    })
+    .catch( error => {
+      console.log(error);
+    });
   }
 
   logout() {
-    this.user = null;
-    this.authChange.next(false);
-    this.router.navigate(['/login']);
+    this.afAuth.auth.signOut();
   }
 
-  getUser() {
-    return { ...this.user };
-  }
 
   isAuth() {
-    return this.user != null;
+    return this.isAuthenticated;
   }
 
-  private authSuccessfully() {
-    this.authChange.next(true);
-    this.router.navigate(['/flashcards']);
-  }
 
 }

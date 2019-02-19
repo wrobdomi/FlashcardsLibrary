@@ -9,24 +9,24 @@
 
      <div>
         <mat-progress-spinner mode="determinate" color="primary" [value]="correctPercentage"></mat-progress-spinner>
-        <p class="spinner-desc">Correct</p>
-        <p class="spinner-desc">{{answeredCorrect}}/{{ allQuestionsNum }}</p>
+        <p class="spinner-desc" *ngIf="learningStarted">Correct</p>
+        <p class="spinner-desc" *ngIf="learningStarted">{{answeredCorrect}}/{{ allQuestionsNum }}</p>
       </div>
 
       <div fxFlex></div>
 
       <div>
         <mat-progress-spinner mode="determinate" color="warn" [value]="wrongPercentage"></mat-progress-spinner>
-        <p class="spinner-desc">Wrong</p>
-        <p class="spinner-desc">{{answeredWrong}}/{{ allQuestionsNum }}</p>
+        <p class="spinner-desc" *ngIf="learningStarted">Wrong</p>
+        <p class="spinner-desc" *ngIf="learningStarted">{{answeredWrong}}/{{ allQuestionsNum }}</p>
       </div>
 
       <div fxFlex></div>
 
       <div>
         <mat-progress-spinner mode="determinate" color="accent" [value]="allQuestionsPercentage"></mat-progress-spinner>
-        <p class="spinner-desc">All</p>
-        <p class="spinner-desc">{{answeredAll}}/{{ allQuestionsNum }}</p>
+        <p class="spinner-desc" *ngIf="learningStarted">All</p>
+        <p class="spinner-desc" *ngIf="learningStarted">{{answeredAll}}/{{ allQuestionsNum }}</p>
       </div>
 
     </mat-card>
@@ -43,7 +43,7 @@
     <hr>
 
     <mat-card-content fxLayoutAlign="center" fxLayout="row" fxLayoutGap="10px">
-      Front of a flashcard
+      {{currentFlashcardFront}}
     </mat-card-content>
 
     <hr>
@@ -53,7 +53,15 @@
       <button
         mat-raised-button
         color="primary"
-        (click)="onAnswered()"> Show Back
+        (click)="onAnswered()"
+        *ngIf="learningStarted"> Show Back
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="startLearning()"
+        *ngIf="!learningStarted"> Start
       </button>
 
     </mat-card-actions>
@@ -68,7 +76,7 @@
     <hr>
 
     <mat-card-content fxLayoutAlign="center" fxLayout="row" fxLayoutGap="10px">
-      Back of a flashcard
+      {{currentFlashcardBack}}
     </mat-card-content>
 
     <hr>

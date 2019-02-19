@@ -17,10 +17,11 @@ export class NewFlashcardContentComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.front = '';
+    this.back = '';
   }
 
   onContentAdded() {
-    console.log('Inside onContentAdded = NewFlashCardComponent');
     this.contentAdded.emit([this.front, this.back]);
   }
 

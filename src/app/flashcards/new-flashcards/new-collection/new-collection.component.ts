@@ -1,13 +1,14 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { FlashcardsService } from '../../flashcards.service';
 import { Learning } from '../../learning.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-new-collection',
   templateUrl: './new-collection.component.html',
   styleUrls: ['./new-collection.component.css']
 })
-export class NewCollectionComponent implements OnInit {
+export class NewCollectionComponent implements OnInit, OnDestroy {
 
   addToExistingCollection = false;
   newCollection: string;
@@ -15,14 +16,20 @@ export class NewCollectionComponent implements OnInit {
   collectionToAdd: string;
 
   availableCollections: Learning[] = [];
-
+  // availableCollections: Observable<any>;
+  availableCollectionsSubscription: Subscription;
 
   @Output() collectionSelected = new EventEmitter<string>();
 
-  constructor(private flashcardsService: FlashcardsService) { }
+  constructor(
+    private flashcardsService: FlashcardsService) { }
 
   ngOnInit() {
-    this.availableCollections = this.flashcardsService.getAvailableCollections();
+    // this.availableCollections = this.flashcardsService.getAvailableCollections();
+    this.availableCollectionsSubscription = this.flashcardsService.learningsChanged.subscribe(
+      learnings => this.availableCollections = learnings
+    );
+    this.flashcardsService.fetchAvailableCollections();
   }
 
   onCollectionChosen() {
@@ -36,6 +43,10 @@ export class NewCollectionComponent implements OnInit {
 
   onClickedFab(exColl) {
     this.collectionSelected.emit(exColl);
+  }
+
+  ngOnDestroy() {
+    this.availableCollectionsSubscription.unsubscribe();
   }
 
 

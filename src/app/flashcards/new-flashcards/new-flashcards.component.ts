@@ -51,6 +51,7 @@ export class NewFlashcardsComponent implements OnInit {
     };
     this.flashcardsService.addFlashcard(flashcard);
     this.openSnackBar('Flashcard Added', 'OK');
+    this.formStage = 1;
 
   }
 
