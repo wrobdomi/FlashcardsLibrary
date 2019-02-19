@@ -21,7 +21,7 @@
 ## Application Description
 
 ### Application features
-The app is an online flashcards library. User can:  
+The app is an online flashcards library I created taking my first steps in Angular and TS. User can:  
 + Sign up, Log in, Log out
 + Browse flashcards from available collections
 + Create collections and flashcards or add flashcards to existing collections
