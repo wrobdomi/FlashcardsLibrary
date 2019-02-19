@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyATbi5wdV-cxtHOzHDhkE-wXwvF0qFkTwo",
+    apiKey: "private",
     authDomain: "flashcards-library.firebaseapp.com",
-    databaseURL: "https://flashcards-library.firebaseio.com",
+    databaseURL: "private",
     projectId: "flashcards-library",
     storageBucket: "flashcards-library.appspot.com",
-    messagingSenderId: "346568795640"
+    messagingSenderId: "private"
   }
 };
